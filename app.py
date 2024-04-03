@@ -12,7 +12,7 @@ def download_audio(current_url):
         try:
             print("Started")
             video = YouTube(current_url)
-            os_path = video.streams.filter(only_audio=True).first().download(output_path="C:\\Users\\chris\\Music\\Music Downloaded\\")
+            os_path = video.streams.filter(only_audio=True).first().download(output_path="<file_Path>")
             new_name = os.path.splitext(os_path)
             os.rename(os_path, new_name[0] + '.mp3')
             print(new_name)
@@ -34,7 +34,7 @@ def download_video(current_url):
             print("Started video download")
             video = YouTube(current_url)
             video_stream = video.streams.filter(file_extension='mp4').first()
-            os_path = video_stream.download(output_path="C:\\Users\\Christin\\Videos\\Videos Downloaded\\")
+            os_path = video_stream.download(output_path="<file_Path>")
             print("Video Download Complete")
             return jsonify("Video Download Complete"), 200
         
