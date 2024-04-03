@@ -1,0 +1,7 @@
+This personal project involves downloading YouTube videos from an alternative source. It is important to note that this project is purely for personal training and exploration purposes and is not intended for commercialization. The aim of this endeavor is to enhance skills, gain experience, and explore the technical aspects of downloading videos from YouTube for educational and developmental reasons.
+
+This project involves a Flask web application that provides endpoints for downloading audio and video content from YouTube. The backend includes functions to handle downloading audio and video separately, utilizing the pytube library for YouTube interactions. The Flask app is set up to receive API requests, process the provided YouTube URL, and initiate the download process in separate threads to avoid blocking the main server. The front end of this project likely consists of a browser extension that triggers the download functionality via a specific hotkey. When the hotkey is activated, the extension sends an API request to the Flask server with the YouTube URL, which then triggers the corresponding download function for either audio or video content. This setup allows for seamless interaction between the front end extension and the backend Flask server for efficient downloading of YouTube content.
+
+Install the requirmet for the flask app and run the app.py file
+
+On your Extension Manager, add the extension folder and set a shortcut of your preference in the "Execute Function" field.
