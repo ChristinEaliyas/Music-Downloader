@@ -20,8 +20,15 @@
   "background": {
     "service_worker": "background.js"
   },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["script.js"]
+    }
+  ],
 
-  "permissions": ["tabs", "commands", "activeTab"],
+  "permissions": ["tabs", "commands", "activeTab", "notifications"],
   "commands": {
     "executeFunction": {
       "suggested_key": {

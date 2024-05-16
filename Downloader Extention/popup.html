@@ -1,10 +1,40 @@
+<html>
 <link rel="stylesheet" href="styles.css">
+
 <body>
+    <div class="background">
+        <video src="assets/Digital_Grapes.mp4" loop muted autoplay id="background"></video>
+    </div>
     <div class="main">
         <div class="title">
-            <h3><span>YT</span>Downloader</h3>
+            <div>
+                <img src="images/logo48.png" alt="">
+            </div>
+            <h1>Downloader</h1>
         </div>
-        <button class="video button">Video</button>
+        <div class="content">
+            <div class="content-1">
+                <h3>Personal Music and Video Downloader</h3>
+            </div>
+            <div class="content-2">
+                <h3>Download Video</h3>
+                <span id="videoDownload">
+                    <img src="assets/download.svg" alt="">
+                </span>
+            </div>
+            <div class="content-2">
+                <h3>Add to Download Queue</h3>
+                <span id="addUrl">
+                    <img src="assets/playlist_add.svg" alt="">
+                </span>
+            </div>
+            <div class="content-2">
+                <h3>Download Queue</h3>
+                <span id="downloadqueue">
+                    <img src="assets/download_for_offline.svg" alt="">
+                </span>
+            </div>
+        </div>
     </div>
 </body>
 <script src="script.js"></script>
