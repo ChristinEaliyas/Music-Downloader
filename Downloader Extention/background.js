@@ -1,7 +1,7 @@
 const musicApi = "http://127.0.0.1:9000/api/music";
 const videoApi = "http://127.0.0.1:9000/api/video";
 const saveUrlApi = "http://127.0.0.1:9000/api/addToList";
-const downloadQueueApi = "http://127.0.0.1:9000//api/downloadQueue"
+const downloadQueueApi = "http://127.0.0.1:9000/api/downloadQueue"
 
 // Return the url of the first youtube tab.
 async function geturl() {
@@ -77,7 +77,8 @@ function downloadQueue(){
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+    body: "Download The Queue"
   };
 
   postRequest(downloadQueueApi, requestOptions)

@@ -7,3 +7,7 @@ def download_video(current_url):
     os_path = video_stream.download(output_path="C:\\Users\\chris\\Videos\\Tutorials")
     print(os_path)
 
+urls =  [
+    ]
+for url in urls:
+    download_video(url)

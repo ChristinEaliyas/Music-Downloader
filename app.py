@@ -14,6 +14,19 @@ directory = "C:\\Users\\chris\\Music\\Music Downloaded"
 
 FILE_PATH = "Playlist.json"
 
+def get_title(url):
+    try:
+        title = YouTube(url).title
+        return title
+    except Exception as error:
+        if 'regex_search' in str(error):
+            return "Invalid URL"
+        elif 'getaddrinfo failed' in str(error):
+            return "Connect to Internet"
+        else:
+            print(error)
+            return "An error occurred: "+error
+
 # -----  Music Downloader -----
 def download_audio(current_url):
     with app.app_context():
@@ -47,8 +60,10 @@ def download_video(current_url):
             filenames = [os.path.splitext(f)[0] for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
             video = YouTube(current_url)
             if video.title not in filenames:
+                print(video.title)
                 video_stream = video.streams.filter(file_extension='mp4').order_by('abr').desc().first()
                 video_stream.download(output_path="C:\\Users\\chris\\Videos\\Tutorials")
+                print("Completed"+video.title)
                 return jsonify("Video Download Complete"), 200
             else:
                 return jsonify("Video Already Existin"), 200
@@ -73,7 +88,7 @@ def download_music():
             return jsonify("Invalid JSON data"), 400
 
         current_url = data['url']
-        thread = threading.Thread(target=download_audio, args=(current_url,))
+        thread = threading.Thread(target=download_video, args=(current_url,))
         thread.start()
 
         return jsonify("Download Initiated"), 200
@@ -91,7 +106,7 @@ def download_video_route():
         thread = threading.Thread(target=download_video, args=(current_url,))
         thread.start()
 
-        return jsonify("Video Download Initiated"), 200
+        return jsonify("Downloading Video: "+YouTube(data['url']).title), 200
     except Exception as error:
         return jsonify(error), 500
 
@@ -113,7 +128,7 @@ def save_url():
         with open(FILE_PATH, 'w') as file:
             json.dump(playlist_links, file, indent=4)
 
-        return jsonify("Url Added to Queue"), 200
+        return jsonify(YouTube(data['url']).title+" Added To Queue"), 200
     except Exception as error:
         return jsonify(error), 500
 
