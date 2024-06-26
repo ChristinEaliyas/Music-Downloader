@@ -2,6 +2,7 @@ const musicApi = "http://127.0.0.1:9000/api/music";
 const videoApi = "http://127.0.0.1:9000/api/video";
 const saveUrlApi = "http://127.0.0.1:9000/api/addToList";
 const downloadQueueApi = "http://127.0.0.1:9000/api/downloadQueue"
+const ChangeDirecotyApi = "http://127.0.0.1:9000/api/changeDirecotory"
 
 // Return the url of the first youtube tab.
 async function geturl() {
@@ -32,13 +33,13 @@ function postRequest(Api, requestOptions){
   });
 }
 
-function sendNotification(data){
+function sendNotification(data) {
   chrome.notifications.create({
-    title : 'YouTube Downloader',
-    message :  data,
-    iconUrl : 'images/logo128.png',
-    type : 'basic'
-  })
+    title: 'YouTube Downloader',
+    message: JSON.stringify(data),
+    iconUrl: 'images/logo128.png',
+    type: 'basic'
+  });
 }
 
 // ----- Video Downloader Api -----
@@ -84,6 +85,20 @@ function downloadQueue(){
   postRequest(downloadQueueApi, requestOptions)
 }
 
+// ----- Change Directory -----
+function ChangeDirecoty(Directory) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ Directory }),
+  };
+
+  postRequest(ChangeDirecotyApi, requestOptions)
+
+}
+
 // ----- Audio Downloader Api -----
 chrome.commands.onCommand.addListener(async function (command) {
   if (command === "executeFunction") {
@@ -110,6 +125,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ success:true });
   }else if(request.message === "callDownloadQueue") {
     downloadQueue()
+    sendResponse({ success:true });
+  }else if(request.message === "ChangeDirectory"){
+    ChangeDirecoty(request.name)
     sendResponse({ success:true });
   }
 });
